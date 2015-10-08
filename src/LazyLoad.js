@@ -4,7 +4,8 @@ var React = require('react'),
     LazyLoad = React.createClass({
         displayName: 'LazyLoad',
         propTypes: {
-            height: React.PropTypes.string
+            height: React.PropTypes.string,
+            adLoadBuffer: React.PropTypes.number
         },
         getInitialState: function() {
             return {
@@ -14,7 +15,7 @@ var React = require('react'),
         handleScroll: function() {
             var bounds = this.getDOMNode().getBoundingClientRect(),
                 scrollTop = window.pageYOffset,
-                top = bounds.top + scrollTop,
+                top = this.props.adLoadBuffer ? bounds.top + scrollTop - this.props.adLoadBuffer : bounds.top + scrollTop,
                 height = bounds.bottom - bounds.top;
 
             if(top === 0 || (top <= (scrollTop + window.innerHeight) && (top + height) > scrollTop)){
