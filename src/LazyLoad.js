@@ -15,10 +15,11 @@ var React = require('react'),
         handleScroll: function() {
             var bounds = this.getDOMNode().getBoundingClientRect(),
                 scrollTop = window.pageYOffset,
-                top = this.props.adLoadBuffer ? bounds.top + scrollTop - this.props.adLoadBuffer : bounds.top + scrollTop,
-                height = bounds.bottom - bounds.top;
+                top = bounds.top + scrollTop,
+                height = bounds.bottom - bounds.top,
+                adLoadBuffer = this.props.adLoadBuffer || 200;  
 
-            if(top === 0 || (top <= (scrollTop + window.innerHeight) && (top + height) > scrollTop)){
+            if(top === 0 || (top - adLoadBuffer <= (scrollTop + window.innerHeight) && (top + height) > scrollTop)){
                 this.setState({visible: true});
                 this.handleVisible();
             }
