@@ -6,7 +6,7 @@ var React = require('react'),
         propTypes: {
             height: React.PropTypes.string,
             adLoadBuffer: React.PropTypes.number,
-            onLoaded: React.PropTypes.func
+            onLoad: React.PropTypes.func
         },
         getInitialState: function() {
             return {
@@ -28,7 +28,7 @@ var React = require('react'),
         handleVisible: function() {
             window.removeEventListener('scroll', this.handleScroll);
             window.removeEventListener('resize', this.handleScroll);            
-            if(this.props.onLoaded) {this.props.onRendered();}
+            if(this.props.onLoad) {this.props.onLoad();}
         },
         componentDidMount: function() {
             window.addEventListener('scroll', this.handleScroll);
