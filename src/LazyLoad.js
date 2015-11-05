@@ -5,7 +5,8 @@ var React = require('react'),
         displayName: 'LazyLoad',
         propTypes: {
             height: React.PropTypes.string,
-            adLoadBuffer: React.PropTypes.number
+            adLoadBuffer: React.PropTypes.number,
+            onLoaded: React.PropTypes.func
         },
         getInitialState: function() {
             return {
@@ -26,7 +27,8 @@ var React = require('react'),
         },
         handleVisible: function() {
             window.removeEventListener('scroll', this.handleScroll);
-            window.removeEventListener('resize', this.handleScroll);
+            window.removeEventListener('resize', this.handleScroll);            
+            if(this.props.onLoaded) {this.props.onRendered();}
         },
         componentDidMount: function() {
             window.addEventListener('scroll', this.handleScroll);
