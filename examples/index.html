@@ -9,7 +9,8 @@
 <div id='test'>test</div>
     <div id="content"></div>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/JSXTransformer.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/react-with-addons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-with-addons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-dom.js"></script>
 
     <script type="text/jsx">
 
@@ -20,11 +21,11 @@
             },
             getInitialState: function() {
                 return {
-                    visible: false 
+                    visible: false
                 };
             },
             handleScroll: function() {
-                var bounds = this.getDOMNode().getBoundingClientRect(),
+                var bounds = ReactDOM.findDOMNode(this).getBoundingClientRect(),
                     scrollTop = window.pageYOffset,
                     top = bounds.top + scrollTop,
                     height = bounds.bottom - bounds.top;
@@ -45,14 +46,10 @@
             },
             render: function () {
                 var renderEl = '',
-                    cx = React.addons.classSet,
                     preloadHeight = {
                         height: this.props.height
                     },
-                    classes = cx({
-                        'lazy-load': true,
-                        'lazy-load-visible': this.state.visible
-                    });
+                    classes = 'lazy-load ' + (this.state.visible) ? 'lazy-load-visible' : '';
 
                 return (
                     <div style={preloadHeight} className={classes}>
@@ -90,7 +87,7 @@
             }
         });
 
-        React.render(<Application />, document.getElementById('content'));
+        ReactDOM.render(<Application />, document.getElementById('content'));
     </script>
 </body>
 </html>

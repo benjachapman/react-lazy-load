@@ -1,4 +1,5 @@
 var React = require('react'),
+    ReactDOM = require('react-dom'),
     ClassNames = require('classnames'),
 
     LazyLoad = React.createClass({
@@ -13,11 +14,11 @@ var React = require('react'),
             };
         },
         handleScroll: function() {
-            var bounds = this.getDOMNode().getBoundingClientRect(),
+            var bounds = ReactDOM.findDOMNode(this).getBoundingClientRect(),
                 scrollTop = window.pageYOffset,
                 top = bounds.top + scrollTop,
                 height = bounds.bottom - bounds.top,
-                adLoadBuffer = this.props.adLoadBuffer || 200;  
+                adLoadBuffer = this.props.adLoadBuffer || 200;
 
             if(top === 0 || (top - adLoadBuffer <= (scrollTop + window.innerHeight) && (top + height) > scrollTop)){
                 this.setState({visible: true});
@@ -51,7 +52,7 @@ var React = require('react'),
                 });
 
             return (
-                React.createElement("div", {style: preloadHeight, className: classes}, 
+                React.createElement("div", {style: preloadHeight, className: classes},
                     this.state.visible ? this.props.children : ''
                 )
             );
