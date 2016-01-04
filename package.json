@@ -1,6 +1,6 @@
 {
   "name": "react-lazy-load",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Simple lazy loading component built with react",
   "main": "dist/LazyLoad.js",
   "files": [
